@@ -2,7 +2,8 @@
 ##' @title Split_data
 ##' @return Splits the data into two subsets (n1 & n2 with n1<n2) to perform screening with FDR control
 ##' @author Atika Farzana Urmi
-##' @param data the whole dataset to be splitted into two subsets
+##' @param data the whole dataset to be splitted into two subsets. The 1st column has to have the name "time"
+##' and the 2nd column has to have the name "delta". Rest will be the covariates.
 ##' @param n1 number of rows in 1st subset
 ##' @param n2 number of rows in 2nd subset
 ##' @param rand_num setting a random number to reproduce the result
@@ -14,7 +15,7 @@ split_data <- function(data, n1, n2, rand_num) {
     data <- data[, c(ncol(data), 1:(ncol(data) - 1))]
     event <- data[data$delta == 1, ]  #220 row
     censored <- data[data$delta == 0, ]  #296 row
-    ############################################################################## 
+    ##############################################################################
 
 
     # rand_num<- floor(runif(1, min=100, max=9999))#4452
