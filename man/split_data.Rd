@@ -7,7 +7,8 @@
 split_data(data, n1, n2, rand_num)
 }
 \arguments{
-\item{data}{the whole dataset to be splitted into two subsets}
+\item{data}{the whole dataset to be splitted into two subsets. The 1st column has to have the name 'time'
+and the 2nd column has to have the name 'delta'. Rest will be the covariates.}
 
 \item{n1}{number of rows in 1st subset}
 
