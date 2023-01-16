@@ -9,8 +9,8 @@ In this package, we develope a model-free screening procedure for the ultra-high
 of the K-M estimates. Our method can capture both linear and non-linear correlation between the predictor and outcome with the help of **ECCFIC**-correlation proposed by Ke and Yin (2019) and 
 does not require any complex estimation or optimization. Furthermore, we tackled the issue of false discoveries in the screening procedure by adapting the 
 **KnockOff** methods by Candes et al. (2018). 
-A nice vignettee demonstrates the example of [TCGA-HNSC] (https://portal.gdc.cancer.gov/projects/TCGA-HNSC) data 
-here:[Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/blob/master/vignettes/Introduction.html)
+A nice vignettee demonstrates the example of [TCGA-HNSC](https://portal.gdc.cancer.gov/projects/TCGA-HNSC) data 
+here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/blob/master/vignettes/Introduction.html)
 
 
 ## References
