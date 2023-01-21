@@ -13,21 +13,16 @@ split_data <- function(data, n1, n2, rand_num) {
     # need to keep censoring rate similar in both data
     data$id <- seq(1:nrow(data))
     data <- data[, c(ncol(data), 1:(ncol(data) - 1))]
-    event <- data[data$delta == 1, ]  #220 row
-    censored <- data[data$delta == 0, ]  #296 row
+    event <- data[data$delta == 1, ]
+    censored <- data[data$delta == 0, ]
     ############################################################################## 
-
-
-    # rand_num<- floor(runif(1, min=100, max=9999))#4452
-    rand_num <- 7519  #8409#6882#2660#1548#2208 #9568#2925 #8409
-    ## split data into n1 and n2.n1<n2. (48% and 52%, larger n1,larger d1 as d1=n1/log(n1))
     per1 <- round(n1/(nrow(data)), 2)
     set.seed(rand_num)
-    #################################################################################### 33 sample observations for n1 data z1<-sample(data$id,248) #516*.48=248
+    ################################ keeping censoring rate similar in both data#########
     p1 <- round(nrow(event) * per1, 0)
     p2 <- round(nrow(censored) * per1, 0)
-    z <- sample(event$id, p1)  #220*.48=106
-    z2 <- sample(censored$id, p2)  #296*.48=142
+    z <- sample(event$id, p1)
+    z2 <- sample(censored$id, p2)
     z1 <- sort(c(z, z2))
 
 
