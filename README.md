@@ -22,9 +22,13 @@ ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")  #screening function
 ESFDRC_func(      #screening with FDR control
 
   data_n1,
+  
   data_n2,
+  
   rand_num,
+  
   q,
+  
   s = round(nrow(data_n1)/log(nrow(data_n1)), 0)
 )
 
