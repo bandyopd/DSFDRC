@@ -18,6 +18,7 @@ here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/
 ## Usage
 
 Screening function
+
 ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")
 
 #time	=a numeric vector of survival time
