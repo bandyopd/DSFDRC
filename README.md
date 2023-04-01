@@ -37,7 +37,7 @@ ESFDRC_func(      #screening with FDR control
 
   #data_n1=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data())
   
-  #data_n2=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data()) Note: n1<n2
+  #data_n2=a data set with column 1= 'time',column2='delta' and rest are 'covariates' Note: n1<n2
                                                                                                                                                    
   #rand_num=a random seed to reproduce the result
                                                                                                                                                    
