@@ -17,11 +17,10 @@ here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/
 
 ## Usage
 
-#Screening function
-
 ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")  #screening function
 
 ESFDRC_func(      #screening with FDR control
+
   data_n1,
   data_n2,
   rand_num,
