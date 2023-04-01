@@ -29,6 +29,7 @@ ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")
 #kernel	=a kernel to use for x, 'gaussian' or 'distance',default gaussian. 
 
 #Screening wit FDR control
+
 ESFDRC_func(
   data_n1,
   data_n2,
@@ -39,10 +40,15 @@ ESFDRC_func(
 
 
 #where,
+
   #data_n1=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data())
+  
   #data_n2=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data()) Note: n1<n2
+                                                                                                                                                   
   #rand_num=a random seed to reproduce the result
+                                                                                                                                                   
   #q=a prespecified false discovery rate (usually .05 or .10)
+                                                                                                                                                   
   #s =the number of covariates to be screened in the 1st step. Default is (n/log(n)) following Fan&Lv(2008) where 'n' i the number of rows in 'data_n1                                                                                                                               
 
 
