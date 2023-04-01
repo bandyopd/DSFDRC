@@ -28,6 +28,27 @@ ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")
 #x_mat =a matrix/dataframe of continious covariates
 
 #kernel	=a kernel to use for x, 'gaussian' or 'distance',default gaussian. if for 'gaussian' kernel, bandwidth is defined as the heuristic median pairwise distances of x
+
+Screenin wit FDR control
+
+ESFDRC_func(
+  data_n1,
+  data_n2,
+  rand_num,
+  q,
+  s = round(nrow(data_n1)/log(nrow(data_n1)), 0)
+)
+
+#data_n1	=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data())
+
+#data_n2	=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data()) Note: n1<n2
+
+#rand_num	=a random seed to reproduce the result
+
+#q	=a prespecified false discovery rate (usually .05 or .10)
+
+#s	=the number of covariates to be screened in the 1st step. Default is (n/log(n)) following Fan&Lv(2008) where 'n' i the number of rows in 'data_n1'
+                                                                                                                                                   
 ## References
 <a id="1">[1]</a> 
 Ke, C., & Yin, X. (2020). 
