@@ -21,6 +21,8 @@ here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/
 
 ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")
 
+#where,
+
 #time	=a numeric vector of survival time
 #delta	=a numeric vector of censoring indicator
 #x_mat =a matrix/dataframe of continious covariates
@@ -34,6 +36,8 @@ ESFDRC_func(
   q,
   s = round(nrow(data_n1)/log(nrow(data_n1)), 0)
 )
+
+
 #where,
   #data_n1=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data())
   #data_n2=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data()) Note: n1<n2
