@@ -42,9 +42,8 @@ ESFDRC_func(      #screening with FDR control
                                                                                                                                                    
   #rand_num=a random seed to reproduce the result
                                                                                                                                                    
-  #q=a prespecified false discovery rate (usually .05 or .10)
-                                                                                                                                                   
-  #s =the number of covariates to be screened in the 1st step. Default is (n/log(n)) where 'n' i the number of rows in 'data_n1                                                                                                                               
+  #q=a prespecified false discovery rate (usually .05 or .10)                                                                                                                                                  
+ #s =the number of covariates to be screened in the 1st step. Default is (n/log(n)) where 'n' i the number of rows in 'data_n1                                                                                                                               
 
 
                                                                                                                                                    
