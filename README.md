@@ -15,7 +15,18 @@ does not require any complex estimation or optimization. Furthermore, we tackled
 A nice vignettee demonstrates the example of [TCGA-HNSC](https://portal.gdc.cancer.gov/projects/TCGA-HNSC) data is available 
 here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/blob/master/vignettes/Introduction.html)
 
+## Usage
 
+Screening function
+ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")
+
+#time	=a numeric vector of survival time
+
+#delta	=a numeric vector of censoring indicator
+
+#x_mat =a matrix/dataframe of continious covariates
+
+#kernel	=a kernel to use for x, 'gaussian' or 'distance',default gaussian. if for 'gaussian' kernel, bandwidth is defined as the heuristic median pairwise distances of x
 ## References
 <a id="1">[1]</a> 
 Ke, C., & Yin, X. (2020). 
