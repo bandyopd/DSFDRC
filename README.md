@@ -19,18 +19,9 @@ here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/
 
 #Screening function
 
-ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")
+ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")  #screening function
 
-#where,
-
-#time	=a numeric vector of survival time
-#delta	=a numeric vector of censoring indicator
-#x_mat =a matrix/dataframe of continious covariates
-#kernel	=a kernel to use for x, 'gaussian' or 'distance',default gaussian. 
-
-#Screening wit FDR control
-
-ESFDRC_func(
+ESFDRC_func(      #screening with FDR control
   data_n1,
   data_n2,
   rand_num,
@@ -38,8 +29,12 @@ ESFDRC_func(
   s = round(nrow(data_n1)/log(nrow(data_n1)), 0)
 )
 
-
 #where,
+
+#time	=a numeric vector of survival time
+#delta	=a numeric vector of censoring indicator
+#x_mat =a matrix/dataframe of continious covariates
+#kernel	=a kernel to use for x, 'gaussian' or 'distance',default gaussian. 
 
   #data_n1=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data())
   
@@ -49,7 +44,7 @@ ESFDRC_func(
                                                                                                                                                    
   #q=a prespecified false discovery rate (usually .05 or .10)
                                                                                                                                                    
-  #s =the number of covariates to be screened in the 1st step. Default is (n/log(n)) following Fan&Lv(2008) where 'n' i the number of rows in 'data_n1                                                                                                                               
+  #s =the number of covariates to be screened in the 1st step. Default is (n/log(n)) where 'n' i the number of rows in 'data_n1                                                                                                                               
 
 
                                                                                                                                                    
