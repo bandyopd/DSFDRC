@@ -1,5 +1,5 @@
 # ESFDRC
-R package for two dimensional marginal screening for the ultra-high dimensional survival data.
+An R package for two dimensional marginal screening for the ultra-high dimensional survival data.
 
 Head and neck cancer is the 6th most common cancer worldwide with an expected 1.08 million new cases each year. 
 Such cancer data are ultra-high dimensional with thousands of clinical features and gene expressions, 
