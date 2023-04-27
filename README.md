@@ -16,14 +16,17 @@ A nice vignettee demonstrates the example of [TCGA-HNSC](https://portal.gdc.canc
 here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/blob/master/vignettes/Introduction.html)
 
 ## Usage
-
+# Data preparation
 p=5000             #number of covariates
 
 n=700              #sample size
 
 library(MASS)
+
 rho=.5
-### function for AR(1) covariance structure (pxp)
+
+#function for AR(1) covariance structure (pxp)
+
 ar1_cov <- function(p, rho) {
   exponent <- abs(matrix(1:p - 1, nrow = p, ncol = p, byrow = TRUE) - 
                     (1:p - 1))
@@ -32,30 +35,44 @@ ar1_cov <- function(p, rho) {
 
 
 k<-ar1_cov(p,rho)                                 #generating AR(1) covariance
+
 x<-mvrnorm(n,mu=rep(0,p),k)                     #covariates from multivariate normal
+
 e<- rnorm(n,0,1)                                #error distribution
+
 
 t=exp(5*(x[,1])+8*x[,10]^2+3*abs(x[,10])+e)     #generating survival time
 
+
 delta<-as.numeric(t<=cens)                      #generating censoring time
+
 censoring_prop<-round(1-(sum(delta)/n),2)       #true censoring rate in the data
 
+
 data<-data.frame(t,cens,delta)
+
 time<-ifelse(delta==1,t,cens)                   #observed time=min(t,cens)
 
 data<-data.frame(time,delta,x)                  #simulated data 
 
-###ECCFIC-Screening
+## ECCFIC-Screening
 library(foreach)
+
 library(ESFDRC)
+
 eccfic<-ECCFIC_screen(time=data$time, data$delta, x_mat=data[,-c(1:2)], kernel = "gaussian")
 
-####ESFDRC (Screening with FDR control)
+## ESFDRC (Screening with FDR control)
 library(knockoff)
+
 rand_num=3
+
 two_datasets<-split_data(data, n1=100, n2=200, rand_num=rand_num)
+
 data_n1<-two_datasets[[1]]
+
 data_n2<-two_datasets[[2]]
+
 final_covariates<-ESFDRC_func(
   data_n1,
   data_n2,
