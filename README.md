@@ -16,7 +16,7 @@ A nice vignettee demonstrates the example of [TCGA-HNSC](https://portal.gdc.canc
 here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/blob/master/vignettes/Introduction.html)
 
 # Usage
-## Data preparation
+### Data preparation
 p=5000             #number of covariates
 
 n=700              #sample size
@@ -55,14 +55,14 @@ time<-ifelse(delta==1,t,cens)                   #observed time=min(t,cens)
 
 data<-data.frame(time,delta,x)                  #simulated data 
 
-## ECCFIC-Screening
+### ECCFIC-Screening
 library(foreach)
 
 library(ESFDRC)
 
 eccfic<-ECCFIC_screen(time=data$time, data$delta, x_mat=data[,-c(1:2)], kernel = "gaussian")
 
-## ESFDRC (Screening with FDR control)
+### ESFDRC (Screening with FDR control)
 library(knockoff)
 
 rand_num=3
