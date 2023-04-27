@@ -1,5 +1,5 @@
-# creating knockoff copies of covairates screened in 1st step.Here we put the bigger data (n2) with only the
-# covariates selected in the screening step
+# creating knockoff copies of covairates screened in 1st step.Here we put the bigger data (n2) with only the covariates
+# selected in the screening step
 ##' @title copy_d_n2
 ##' @return a data frame of time,delta and knockoff copies of original covariates
 ##' @author Atika Farzana Urmi
