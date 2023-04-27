@@ -80,7 +80,7 @@ final_covariates<-ESFDRC_func(
 )
 
                                                                                                                                                    
-## References
+# References
 <a id="1">[1]</a> 
 Ke, C., & Yin, X. (2020). 
 Expected conditional characteristic function-based measures for
