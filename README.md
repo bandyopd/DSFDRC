@@ -17,35 +17,48 @@ here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/
 
 ## Usage
 
-ECCFIC_screen(time, delta, x_mat, kernel = "gaussian")  #screening function
+p=5000             #number of covariates
+n=700              #sample size
+library(MASS)
+rho=.5
+### function for AR(1) covariance structure (pxp)
+ar1_cov <- function(p, rho) {
+  exponent <- abs(matrix(1:p - 1, nrow = p, ncol = p, byrow = TRUE) - 
+                    (1:p - 1))
+  rho^exponent
+}
 
-ESFDRC_func(      #screening with FDR control
 
+k<-ar1_cov(p,rho)                                 #generating AR(1) covariance
+x<-mvrnorm(n,mu=rep(0,p),k)                     #covariates from multivariate normal
+e<- rnorm(n,0,1)                                #error distribution
+
+t=exp(5*(x[,1])+8*x[,10]^2+3*abs(x[,10])+e)     #generating survival time
+
+delta<-as.numeric(t<=cens)                      #generating censoring time
+censoring_prop<-round(1-(sum(delta)/n),2)       #true censoring rate in the data
+
+data<-data.frame(t,cens,delta)
+time<-ifelse(delta==1,t,cens)                   #observed time=min(t,cens)
+
+data<-data.frame(time,delta,x)                  #simulated data 
+
+###ECCFIC-Screening
+library(foreach)
+library(ESFDRC)
+eccfic<-ECCFIC_screen(time=data$time, data$delta, x_mat=data[,-c(1:2)], kernel = "gaussian")
+
+####ESFDRC (Screening with FDR control)
+library(knockoff)
+rand_num=3
+two_datasets<-split_data(data, n1=100, n2=200, rand_num=rand_num)
+data_n1<-two_datasets[[1]]
+data_n2<-two_datasets[[2]]
+final_covariates<-ESFDRC_func(
   data_n1,
   data_n2,
-  rand_num,
-  
-  q,
-  
-  s = round(nrow(data_n1)/log(nrow(data_n1)), 0)
+  rand_num,q=.05
 )
-
-#where,
-
-#time	=a numeric vector of survival time
-#delta	=a numeric vector of censoring indicator
-#x_mat =a matrix/dataframe of continious covariates
-#kernel	=a kernel to use for x, 'gaussian' or 'distance',default gaussian. 
-
-  #data_n1=a data set with column 1= 'time',column2='delta' and rest are 'covariates' (can be obtained from the function split_data())
-  
-  #data_n2=a data set with column 1= 'time',column2='delta' and rest are 'covariates' Note: n1<n2
-                                                                                                                                                   
-  #rand_num=a random seed to reproduce the result
-                                                                                                                                                   
-  #q=a prespecified false discovery rate (usually .05 or .10)                                                                                                                                                  
- #s =the number of covariates to be screened in the 1st step. Default is (n/log(n)) where 'n' i the number of rows in 'data_n1                                                                                                                               
-
 
                                                                                                                                                    
 ## References
