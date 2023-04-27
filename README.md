@@ -17,8 +17,8 @@ here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/
 
 ## Usage
 
-p=5000             #number of covariates
-n=700              #sample size
+p=5000             #number of covariates\\
+n=700              #sample size\\
 library(MASS)
 rho=.5
 ### function for AR(1) covariance structure (pxp)
