@@ -15,6 +15,10 @@ does not require any complex estimation or optimization. Furthermore, we tackled
 A nice vignettee demonstrates the example of [TCGA-HNSC](https://portal.gdc.cancer.gov/projects/TCGA-HNSC) data is available 
 here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/blob/master/vignettes/Introduction.html)
 
+# Installation
+install.packages("devtools")
+devtools::install_github("urmiaf/ESFDRC")
+
 # Usage
 ### Data preparation
 p=5000             #number of covariates
