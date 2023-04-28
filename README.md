@@ -17,6 +17,7 @@ here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/
 
 # Installation
 install.packages("devtools")
+
 devtools::install_github("urmiaf/ESFDRC")
 
 # Usage
