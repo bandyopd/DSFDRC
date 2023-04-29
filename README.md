@@ -22,14 +22,16 @@ devtools::install_github("urmiaf/ESFDRC")
 
 # Usage
 ### Data preparation
-p=5000             #number of covariates
+p=5000 #number of covariates
 
-n=700              #sample size
+n=700 #sample size
 
 library(MASS)
 
 rho=.5
+rand_num<- 8346
 
+set.seed(rand_num) 
 #function for AR(1) covariance structure (pxp)
 
 ar1_cov <- function(p, rho) {
@@ -37,32 +39,26 @@ ar1_cov <- function(p, rho) {
                     (1:p - 1))
   rho^exponent
 }
+k<-ar1_cov(p,rho) #generating AR(1) covariance
 
+x<-mvrnorm(n,mu=rep(0,p),k) #covariates from multivariate normal
 
-k<-ar1_cov(p,rho)                                 #generating AR(1) covariance
+e<- rnorm(n,0,1) #error distribution
 
-x<-mvrnorm(n,mu=rep(0,p),k)                     #covariates from multivariate normal
+t=exp(5*(x[,1])+8*x[,10]^2+3*abs(x[,10])+e) #generating survival time
+cens=runif(n,0,930)
+delta<-as.numeric(t<=cens) #generating censoring time
 
-e<- rnorm(n,0,1)                                #error distribution
-
-
-t=exp(5*(x[,1])+8*(x[,10]^2)+3*(abs(x[,10]))+e)     #generating survival time
-
-
-delta<-as.numeric(t<=cens)                      #generating censoring time
-
-censoring_prop<-round(1-(sum(delta)/n),2)       #true censoring rate in the data
-
+censoring_prop<-round(1-(sum(delta)/n),2) #true censoring rate in the data
 
 data<-data.frame(t,cens,delta)
 
-time<-ifelse(delta==1,t,cens)                   #observed time=min(t,cens)
+time<-ifelse(delta==1,t,cens) #observed time=min(t,cens)
 
-data<-data.frame(time,delta,x)                  #simulated data 
+data<-data.frame(time,delta,x) #simulated data
 
 ### ECCFIC-Screening
 library(foreach)
-
 library(ESFDRC)
 
 eccfic<-ECCFIC_screen(time=data$time, data$delta, x_mat=data[,-c(1:2)], kernel = "gaussian")
@@ -72,7 +68,7 @@ library(knockoff)
 
 rand_num=3
 
-two_datasets<-split_data(data, n1=100, n2=200, rand_num=rand_num)
+two_datasets<-split_data(data, n1=300, n2=400, rand_num=rand_num)
 
 data_n1<-two_datasets[[1]]
 
