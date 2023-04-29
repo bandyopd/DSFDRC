@@ -29,6 +29,7 @@ n=700 #sample size
 library(MASS)
 
 rho=.5
+
 rand_num<- 8346
 
 set.seed(rand_num) 
