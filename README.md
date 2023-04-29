@@ -59,6 +59,7 @@ data<-data.frame(time,delta,x) #simulated data
 
 ### ECCFIC-Screening
 library(foreach)
+
 library(ESFDRC)
 
 eccfic<-ECCFIC_screen(time=data$time, data$delta, x_mat=data[,-c(1:2)], kernel = "gaussian")
