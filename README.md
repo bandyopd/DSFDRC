@@ -33,6 +33,7 @@ rho=.5
 rand_num<- 8346
 
 set.seed(rand_num) 
+
 #function for AR(1) covariance structure (pxp)
 
 ar1_cov <- function(p, rho) {
@@ -40,6 +41,7 @@ ar1_cov <- function(p, rho) {
                     (1:p - 1))
   rho^exponent
 }
+
 k<-ar1_cov(p,rho) #generating AR(1) covariance
 
 x<-mvrnorm(n,mu=rep(0,p),k) #covariates from multivariate normal
