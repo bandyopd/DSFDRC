@@ -48,7 +48,7 @@ x<-mvrnorm(n,mu=rep(0,p),k) #covariates from multivariate normal
 
 e<- rnorm(n,0,1) #error distribution
 
-t=exp(5*(x[,1])+8*x[,10]^2+3*abs(x[,10])+e) #generating survival time
+t=exp(5*(x[,1])+8*(x[,10]^2)+3*(abs(x[,10]))+e) #generating survival time
 cens=runif(n,0,930)
 delta<-as.numeric(t<=cens) #generating censoring time
 
