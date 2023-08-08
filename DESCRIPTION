@@ -1,5 +1,5 @@
-Package: ESFDRC
-Title: Marginal feature Screening with FDR control for the ultrahigh-dimensional right censored data
+Package: DSFDRC
+Title: Kernel Based Dual Screening with FDR Control for the Ultrahigh-dimensional Right Censored Data
 Version: 1.0
 Authors@R: c(
     person("Atika", "Urmi", email = "farzanaurmi90@gmail.com", role = c("cre","aut")),
