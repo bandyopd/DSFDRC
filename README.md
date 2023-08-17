@@ -1,4 +1,4 @@
-# ESFDRC
+# DSFDRC
 An R package for two dimensional marginal screening for the ultra-high dimensional survival data.
 
 Head and neck cancer is the 6th most common cancer worldwide with an expected 1.08 million new cases each year. 
@@ -13,12 +13,12 @@ does not require any complex estimation or optimization. Furthermore, we tackled
 # Description
 
 A nice vignettee demonstrates the example of [TCGA-HNSC](https://portal.gdc.cancer.gov/projects/TCGA-HNSC) data is available 
-here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/ESFDRC/blob/master/vignettes/Introduction.html)
+here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/DSFDRC/blob/master/vignettes/Introduction.html)
 
 # Installation
 install.packages("devtools")
 
-devtools::install_github("urmiaf/ESFDRC")
+devtools::install_github("urmiaf/DSFDRC")
 
 # Usage
 ### Data preparation
@@ -65,11 +65,11 @@ data<-data.frame(time,delta,x) #simulated data
 ### ECCFIC-Screening
 library(foreach)
 
-library(ESFDRC)
+library(DSFDRC)
 
 eccfic<-ECCFIC_screen(time=data$time, data$delta, x_mat=data[,-c(1:2)], kernel = "gaussian")
 
-### ESFDRC (Screening with FDR control)
+### DSFDRC (Screening with FDR control)
 library(knockoff)
 
 rand_num=3
@@ -80,7 +80,7 @@ data_n1<-two_datasets[[1]]
 
 data_n2<-two_datasets[[2]]
 
-final_covariates<-ESFDRC_func(
+final_covariates<-DSFDRC_func(
   data_n1,
   data_n2,
   rand_num,q=.05
