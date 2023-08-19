@@ -28,18 +28,20 @@ KIDS <- function(x, y, delta, swap = F) {
             x0 <- x[, i][delta == 0]
             x1 <- x[, i][delta == 1]
             sigma2x = 0.5 * median(dist(x[, i], diag = T, upper = T)^2)
+            Kx0 <- K(x0, sigma2x)
+            Kx1 <- K(x1, sigma2x)
 
             mK = mean(K(x[, i], sigma2x))
-            mK0 = mean(K(x0, sigma2x))
-            mK1 = mean(K(x1, sigma2x))
+            mK0 = mean(Kx0)
+            mK1 = mean(Kx1)
             wmK = w0 * mK0 + w1 * mK1
             omega1 <- (wmK - mK)/(1 - mK)
 
-
-            a <- sum(G(y0, n0) * K(x0, sigma2x))/n0 - mK0
-            b <- sum(G(y1, n1) * K(x1, sigma2x))/n1 - mK1
-            c <- w0 * mK0 + w1 * mK1
-            omega21 <- (w0 * a + w1 * b)/(1 - c)
+            Gy0 <- G(y0, n0)
+            Gy1 <- G(y1, n1)
+            a <- sum(Gy0 * Kx0)/n0 - mK0
+            b <- sum(Gy1 * Kx1)/n1 - mK1
+            omega21 <- (w0 * a + w1 * b)/(1 - wmK)
 
             omega[i, ] <- c(omega1, omega21)
         }
@@ -49,21 +51,28 @@ KIDS <- function(x, y, delta, swap = F) {
         for (i in 1:p) {
             x0 <- x[, i][delta == 0]
             x1 <- x[, i][delta == 1]
-            sigma2x = 0.5 * median(dist(x[, i], diag = T, upper = T)^2)
-            mK = mean(K(x[, i], sigma2x))
-            mK0 = mean(K(x0, sigma2x))
-            mK1 = mean(K(x1, sigma2x))
-            wmK = w0 * mK0 + w1 * mK1
-            omega1 <- (wmK - mK)/(1 - mK)
-
             sigma2y = 0.5 * median(dist(y, diag = T, upper = T)^2)
-            mKy0 <- mean(K(y0, sigma2y))
-            mKy1 <- mean(K(y1, sigma2y))
-            mKy <- mean(K(y, sigma2y))
-            a <- sum(G(x0, n0) * K(y0, sigma2y))/n0 - mKy0
-            b <- sum(G(x1, n1) * K(y1, sigma2y))/n1 - mKy1
-            c <- w0 * mKy0 + w1 * mKy1
-            omega22 <- (w0 * a + w1 * b)/(1 - c)
+            Ky0 <- K(y0, sigma2y)
+            Ky1 <- K(y1, sigma2y)
+            mKy0 = mean(Ky0)
+            mKy1 = mean(Ky1)
+            wmKy = mKy0 * w0 + mKy1 * w1
+
+            sigma2x = 0.5 * median(dist(x[, i], diag = T, upper = T)^2)
+            Kx = K(x[, i], sigma2x)
+            Kx0 = K(x0, sigma2x)
+            Kx1 = K(x1, sigma2x)
+            mKx = mean(Kx)
+            mKx0 = mean(Kx0)
+            mKx1 = mean(Kx1)
+            wmKx = mKx0 * w0 + mKx1 * w1
+            omega1 = (wmKx - mKx)/(1 - mKx)
+
+            Gx0 = G(x0, n0)
+            Gx1 = G(x1, n0)
+            a = sum(Gx0 * Ky0)/n0 - mKy0
+            b = sum(Gx1 * Ky1)/n1 - mKy1
+            omega22 = (a * w0 + b * w1)/(1 - wmKy)
 
             omega[i, ] <- c(omega1, omega22)
         }
@@ -77,3 +86,4 @@ KIDS <- function(x, y, delta, swap = F) {
     colnames(omega) <- paste("omega", 1:2, sep = "")
     list(omega = omega, top_covariates = rank_index)
 }
+

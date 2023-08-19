@@ -18,6 +18,8 @@ K <- function(x, sigma2 = "default") {
     return(exp(-as.matrix(dist)/2/sigma2))
 }
 
+#' @export
+
 G <- function(y, n) {
     bw = 1.06 * sd(y) * n^(-1/5)
     dist = dist(y, diag = T, upper = T)^2
