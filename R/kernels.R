@@ -1,9 +1,8 @@
 #' These kernel functions returnf Gaussian kernel as a reproducing (K()) or smoothing (G()) kernel
-##' @title Kernel functions
-##' @return Reproducing kernel (K) and Smoothing Kernel (G) for a vector
+##' @title Reproducing Gaussian Kernel K(.)
+##' @return Reproducing kernel (K) for a vector
 ##' @author Chenlu Ke
 ##' @param x the vector to calculate the kernel
-##' @param n length of x
 ##' @param sigma2 the bandwidth of the reproducing kernel K(), default is the heuristic median pairwise distance
 #' @export
 
@@ -18,6 +17,11 @@ K <- function(x, sigma2 = "default") {
     return(exp(-as.matrix(dist)/2/sigma2))
 }
 
+##' @title Smoothing Kernel G(.)
+##' @return Smoothing Kernel (G) for a vector
+##' @author Chenlu Ke
+##' @param x the vector to calculate the kernel
+##' @param n length of x
 #' @export
 
 G <- function(y, n) {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/kernels.R
 \name{K}
 \alias{K}
-\title{Kernel functions}
+\title{Reproducing Gaussian Kernel K(.)}
 \usage{
 K(x, sigma2 = "default")
 }
@@ -10,11 +10,9 @@ K(x, sigma2 = "default")
 \item{x}{the vector to calculate the kernel}
 
 \item{sigma2}{the bandwidth of the reproducing kernel K(), default is the heuristic median pairwise distance}
-
-\item{n}{length of x}
 }
 \value{
-Reproducing kernel (K) and Smoothing Kernel (G) for a vector
+Reproducing kernel (K) for a vector
 }
 \description{
 These kernel functions returnf Gaussian kernel as a reproducing (K()) or smoothing (G()) kernel
