@@ -14,13 +14,13 @@
 ##' default is 'FALSE'.
 #' @export
 aKIDS <- function(x, y, delta, n1, d, fdr, rand_number, swap = F) {
+    set.seed(rand_number)
     z1 <- index_n1(delta, n1)
     step1 <- KIDS(x[z1, ], y[z1], delta[z1], swap = swap)
     d1 <- unname(unlist(step1[2])[1:d])
     # knockoff construction
     xo <- x[, d1]  #original d1 covariates (n1+n2)
     xk <- x[, d1]
-    set.seed(rand_num)
     xk[-z1, ] <- create.second_order(as.matrix(xo[-z1, ]), method = "sdp")  # d1covariates(original n1+knockoff n2)
     # step2
 
