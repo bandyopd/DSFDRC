@@ -20,10 +20,10 @@ Note: n1+n2=n and n1<n2}
 
 \item{fdr}{a single/vector of prespecified type I error rate.}
 
+\item{rand_number}{a random seed to reproduce the result}
+
 \item{swap}{if 'TRUE', interchanges two continuous variable (X and Y) while calculating the smoothing Kernel G().
 default is 'FALSE'.}
-
-\item{rand_num}{a random seed to reproduce the result}
 }
 \value{
 a list of active predictors while controlling the prespecified false discovery rate (FDR)

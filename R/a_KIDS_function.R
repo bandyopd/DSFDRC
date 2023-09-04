@@ -9,7 +9,7 @@
 ##' Note: n1+n2=n and n1<n2
 ##' @param d number of predictors to be selected in the screening step
 ##' @param fdr a single/vector of prespecified type I error rate.
-##' @param rand_num a random seed to reproduce the result
+##' @param rand_number a random seed to reproduce the result
 ##' @param swap if 'TRUE', interchanges two continuous variable (X and Y) while calculating the smoothing Kernel G().
 ##' default is 'FALSE'.
 #' @export
