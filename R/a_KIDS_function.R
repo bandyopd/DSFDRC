@@ -13,8 +13,8 @@
 ##' @param swap if 'TRUE', interchanges two continuous variable (X and Y) while calculating the smoothing Kernel G().
 ##' default is 'FALSE'.
 #' @export
-aKIDS <- function(x, y, delta, n1, d, fdr, rand_numb, swap = F) {
-    set.seed(rand_numb)
+aKIDS <- function(x, y, delta, n1, d, fdr, rand_number, swap = F) {
+    set.seed(rand_number)
     z1 <- index_n1(delta, n1)
     step1 <- KIDS(x[z1, ], y[z1], delta[z1], swap = swap)
     d1 <- unname(unlist(step1[2])[1:d])
