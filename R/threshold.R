@@ -13,8 +13,7 @@ threshold <- function(W1, W2, fdr) {
     rW <- (rank(-W1) > rank(-W2)) + 1  #lower value, higher rank, coding values to 1/2 instead of 0/1 using +1
     th <- matrix(0, length(fdr), 2)
     offset = 1
-    ratio <- sapply(1:nrow(df), function(i) (offset + sum(W1 <= -df[i, 1] | W2 <= -df[i, 2]))/sum(W1 >= df[i, 1] | W2 >=
-        df[i, 2]))
+    ratio <- sapply(1:nrow(df), function(i) (offset + sum(W1 <= -df[i, 1] | W2 <= -df[i, 2]))/sum(W1 >= df[i, 1] | W2 >= df[i, 2]))
     for (i in 1:length(fdr)) {
         ok <- which(ratio <= fdr[i])
         if (length(ok) == 0) {
