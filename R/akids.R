@@ -1,4 +1,4 @@
-#' aKIDS-alpha-controlled kernel-based independence dual screening
+#' a_KIDS-alpha-controlled kernel-based independence dual screening
 ##' @title a_KIDS
 ##' @return a list of active predictors while controlling the prespecified false discovery rate (FDR)
 ##' @author Atika Farzana Urmi, Chenlu Ke
@@ -14,13 +14,13 @@
 ##' default is 'FALSE'.
 #' @export
 a_KIDS <- function(x, y, delta, n1, d, fdr, rand_number, swap = F) {
-    set.seed(rand_number)
     z1 <- index_n1(delta, n1)
     step1 <- KIDS(x[z1, ], y[z1], delta[z1], swap = swap)
     d1 <- unname(unlist(step1[2])[1:d])
     # knockoff construction
     xo <- x[, d1]  #original d1 covariates (n1+n2)
     xk <- x[, d1]
+    set.seed(rand_number)
     xk[-z1, ] <- create.second_order(as.matrix(xo[-z1, ]), method = "sdp")  # d1covariates(original n1+knockoff n2)
     # step2
 
@@ -32,11 +32,9 @@ a_KIDS <- function(x, y, delta, n1, d, fdr, rand_number, swap = F) {
         d2[[i]] <- unique(as.vector(d1[which(W1 >= z2[i, 1] | W2 >= z2[i, 2])]))
         ifelse(length(d2[[i]]) == 0, d2[[i]] <- 0, d2[[i]])
     }
-    d2
+    # d2
+    list(d1, d2)
 }
-
-
-
 
 
 

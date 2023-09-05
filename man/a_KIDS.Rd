@@ -29,7 +29,7 @@ default is 'FALSE'.}
 a list of active predictors while controlling the prespecified false discovery rate (FDR)
 }
 \description{
-aKIDS-alpha-controlled kernel-based independence dual screening
+a_KIDS-alpha-controlled kernel-based independence dual screening
 }
 \author{
 Atika Farzana Urmi, Chenlu Ke
