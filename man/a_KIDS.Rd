@@ -4,7 +4,7 @@
 \alias{a_KIDS}
 \title{a_KIDS}
 \usage{
-a_KIDS(x, y, delta, n1, d, fdr, rand_number, swap = F)
+a_KIDS(x, y, delta, n1, d, fdr, swap = F)
 }
 \arguments{
 \item{x}{a matrix of covariates}
@@ -19,8 +19,6 @@ Note: n1+n2=n and n1<n2}
 \item{d}{number of predictors to be selected in the screening step}
 
 \item{fdr}{a single/vector of prespecified type I error rate.}
-
-\item{rand_number}{a random seed to reproduce the result}
 
 \item{swap}{if 'TRUE', interchanges two continuous variable (X and Y) while calculating the smoothing Kernel G().
 default is 'FALSE'.}
