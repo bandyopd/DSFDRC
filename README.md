@@ -14,8 +14,7 @@ does not require any complex estimation or optimization. Furthermore, we tackled
 
 A nice vignettee demonstrates the example of [TCGA-HNSC](https://portal.gdc.cancer.gov/projects/TCGA-HNSC) data is available 
 here: [Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/DSFDRC/blob/master/vignettes/vignettes_for_DSFDRC.html)
-https://github.com/urmiaf/DSFDRC/blob/master/vignettes/vignettes_for_DSFDRC.html
-#[Vignette](http://htmlpreview.github.io/?https://github.com/urmiaf/DSFDRC/blob/master/vignettes/Introduction.html)
+
 # Installation
 install.packages("devtools")
 
