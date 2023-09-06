@@ -23,7 +23,9 @@ devtools::install_github("urmiaf/DSFDRC")
 # Usage
 ### Data preparation
 
-ar1_cov <- function(p, rho) {  #AR(1) covariance structure
+#AR(1) covariance structure
+
+ar1_cov <- function(p, rho) {  
   exponent <- abs(matrix(1:p - 1, nrow = p, ncol = p, byrow = TRUE) - 
                     (1:p - 1))
   rho^exponent
