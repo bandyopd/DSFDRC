@@ -8,82 +8,101 @@
 ##' @param swap if 'TRUE', interchanges two continuous variable (X and Y) while calculating the smoothing Kernel G().
 ##' default is 'FALSE'.
 #' @export
+
 KIDS <- function(x, y, delta, swap = F) {
-    # x=covariate matrix/data
 
     n <- nrow(x)
-    n0 <- sum(delta == 0)
+    p <- ncol(x)
+    id0 <- delta == 0
+    n0 <- sum(id0)
     n1 <- n - n0
-    w0 <- n0/n  #weights for delta==0
-    w1 <- n1/n
-    p = ncol(x)
-    y0 <- y[delta == 0]
-    y1 <- y[delta == 1]
-    omega <- matrix(0, p, 2)
+    w0 <- n0/n
+    w1 <- 1 - w0
+    ohat <- matrix(0, p, 2)
 
     if (swap == F) {
-        # ir=T
+        x0 <- x[id0, ]
+        x1 <- x[!id0, ]
+        # bwy <- 1.06*sd(y)*n^(-1/5)
+        tGGy0 <- NW_RBF(y[id0], n0)
+        tGGy1 <- NW_RBF(y[!id0], n1)
 
-        for (i in 1:p) {
-            x0 <- x[, i][delta == 0]
-            x1 <- x[, i][delta == 1]
-            sigma2x = 0.5 * median(dist(x[, i], diag = T, upper = T)^2)
-            Kx0 <- K(x0, sigma2x)
-            Kx1 <- K(x1, sigma2x)
+        Omega <- function(u, u0, u1) {
 
-            mK = mean(K(x[, i], sigma2x))
-            mK0 = mean(Kx0)
-            mK1 = mean(Kx1)
-            wmK = w0 * mK0 + w1 * mK1
-            omega1 <- (wmK - mK)/(1 - mK)
+            distu = dist(u, diag = T, upper = T)^2
+            sigma2u = 0.5 * median(distu)
+            if (sigma2u == 0) {
+                sigma2u = 0.001
+            }
+            K = exp(-as.matrix(distu)/2/sigma2u)
+            K0 = exp(-as.matrix(dist(u0, diag = T, upper = T)^2)/2/sigma2u)
+            K1 = exp(-as.matrix(dist(u1, diag = T, upper = T)^2)/2/sigma2u)
+            mK = mean(K)
+            mK0 = mean(K0)
+            mK1 = mean(K1)
+            wmK = mK0 * w0 + mK1 * w1
+            omega1 = (wmK - mK)/(1 - mK)
 
-            Gy0 <- G(y0, n0)
-            Gy1 <- G(y1, n1)
-            a <- sum(Gy0 * Kx0)/n0 - mK0
-            b <- sum(Gy1 * Kx1)/n1 - mK1
-            omega21 <- (w0 * a + w1 * b)/(1 - wmK)
+            Hy0 = sum(tGGy0 * K0)/n0 - mK0
+            Hy1 = sum(tGGy1 * K1)/n1 - mK1
+            omega2 = (Hy0 * w0 + Hy1 * w1)/(1 - wmK)
 
-            omega[i, ] <- c(omega1, omega21)
+            return(c(omega1, omega2))
+        }
+
+        for (j in 1:p) {
+            ohat[j, ] = Omega(x[, j], x0[, j], x1[, j])
         }
 
     } else {
+        x0 <- x[id0, ]
+        x1 <- x[!id0, ]
+        disty = dist(y, diag = T, upper = T)^2
+        sigma2y = 0.5 * median(disty)
+        Ky0 <- exp(-as.matrix(dist(y[id0], diag = T, upper = T)^2)/2/sigma2y)
+        Ky1 <- exp(-as.matrix(dist(y[!id0], diag = T, upper = T)^2)/2/sigma2y)
+        mKy0 = mean(Ky0)
+        mKy1 = mean(Ky1)
+        wmKy = mKy0 * w0 + mKy1 * w1
 
-        for (i in 1:p) {
-            x0 <- x[, i][delta == 0]
-            x1 <- x[, i][delta == 1]
-            sigma2y = 0.5 * median(dist(y, diag = T, upper = T)^2)
-            Ky0 <- K(y0, sigma2y)
-            Ky1 <- K(y1, sigma2y)
-            mKy0 = mean(Ky0)
-            mKy1 = mean(Ky1)
-            wmKy = mKy0 * w0 + mKy1 * w1
+        Omega <- function(u, u0, u1) {
 
-            sigma2x = 0.5 * median(dist(x[, i], diag = T, upper = T)^2)
-            Kx = K(x[, i], sigma2x)
-            Kx0 = K(x0, sigma2x)
-            Kx1 = K(x1, sigma2x)
-            mKx = mean(Kx)
-            mKx0 = mean(Kx0)
-            mKx1 = mean(Kx1)
-            wmKx = mKx0 * w0 + mKx1 * w1
-            omega1 = (wmKx - mKx)/(1 - mKx)
+            distu = dist(u, diag = T, upper = T)^2
+            sigma2u = 0.5 * median(distu)
+            if (sigma2u == 0) {
+                sigma2u = 0.001
+            }
+            K = exp(-as.matrix(distu)/2/sigma2u)
+            K0 = exp(-as.matrix(dist(u0, diag = T, upper = T)^2)/2/sigma2u)
+            K1 = exp(-as.matrix(dist(u1, diag = T, upper = T)^2)/2/sigma2u)
+            mK = mean(K)
+            mK0 = mean(K0)
+            mK1 = mean(K1)
+            wmK = mK0 * w0 + mK1 * w1
+            omega1 = (wmK - mK)/(1 - mK)
 
-            Gx0 = G(x0, n0)
-            Gx1 = G(x1, n0)
-            a = sum(Gx0 * Ky0)/n0 - mKy0
-            b = sum(Gx1 * Ky1)/n1 - mKy1
-            omega22 = (a * w0 + b * w1)/(1 - wmKy)
+            # bwx <- 1.06*sd(u)*n^(-1/5)
+            tGGx0 = NW_RBF(u0, n0)
+            tGGx1 = NW_RBF(u1, n1)
+            Hy0 = sum(tGGx0 * Ky0)/n0 - mKy0
+            Hy1 = sum(tGGx1 * Ky1)/n1 - mKy1
+            omega2 = (Hy0 * w0 + Hy1 * w1)/(1 - wmKy)
 
-            omega[i, ] <- c(omega1, omega22)
+            return(c(omega1, omega2))
         }
+
+        for (j in 1:p) {
+            ohat[j, ] = Omega(x[, j], x0[, j], x1[, j])
+        }
+
     }
 
-    omega
-    r1 <- rank(-omega[, 1])
-    r2 <- rank(-omega[, 2])
-    rank_index <- order(pmin(r1, r2), pmax(r1, r2))  #returns the index of x for lowest to highest rank
-    # if returns 4, then x4 has rank1
-    colnames(omega) <- paste("omega", 1:2, sep = "")
-    list(omega = omega, top_covariates = rank_index)
+    r1 <- rank(-ohat[, 1])
+    r2 <- rank(-ohat[, 2])
+    rank_index <- order(pmin(r1, r2), pmax(r1, r2))
+    colnames(ohat) <- paste("ohat", 1:2, sep = "")
+    list(omega = ohat, top_covariates = rank_index)
+
+
 }
 
