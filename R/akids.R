@@ -22,8 +22,8 @@ a_KIDS <- function(x, y, delta, n1, d, fdr, swap = F) {
     xk[-z1, ] <- create.second_order(as.matrix(xo[-z1, ]), method = "sdp")  # d1covariates(original n1+knockoff n2)
     # step2
 
-    W1 <- KIDS(xo, y, delta, swap)$omega[, 1] - KIDS(xk, y, delta, swap)$omega[, 1]
-    W2 <- KIDS(xo, y, delta, swap)$omega[, 2] - KIDS(xk, y, delta, swap)$omega[, 2]
+    W1 <- KIDS(xo, y, delta, swap = swap)$omega[, 1] - KIDS(xk, y, delta, swap = swap)$omega[, 1]
+    W2 <- KIDS(xo, y, delta, swap = swap)$omega[, 2] - KIDS(xk, y, delta, swap = swap)$omega[, 2]
     z2 <- threshold(W1, W2, fdr)
     d2 <- vector("list", length(fdr))
     for (i in 1:nrow(z2)) {
