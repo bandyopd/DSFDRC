@@ -17,7 +17,7 @@ KIDS(x, y, delta, swap = F)
 default is 'FALSE'.}
 }
 \value{
-a list of a matrix of correlation(omega) and the order of covariates based on the highest correlations.
+a list of a matrix of correlation(omega) and the index of covariates based on the highest correlations.
 }
 \description{
 KIDS-kernel-based independence dual screening

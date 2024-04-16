@@ -1,6 +1,6 @@
 #' KIDS-kernel-based independence dual screening
 ##' @title KIDS
-##' @return a list of a matrix of correlation(omega) and the order of covariates based on the highest correlations.
+##' @return a list of a matrix of correlation(omega) and the index of covariates based on the highest correlations.
 ##' @author Chenlu Ke, Atika Urmi
 ##' @param x a matrix of covariates
 ##' @param y observed time points

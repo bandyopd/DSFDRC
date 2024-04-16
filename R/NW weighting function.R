@@ -1,8 +1,8 @@
 
-##' @title Nadaraya-Watson kernel regression
-##' @return returns a (nxn) matrix of kernel regression estimate using Nadaraya-Watson kernel regression
+##' @title Nadara-Watson estimates of smoothing kernel G
+##' @return returns a (nxn) matrix of the estimated probability density function (PDF) of a random vector 
 ##' @author Chenlu Ke
-##' @param y the vector to calculate the kernel
+##' @param y the one dimensional vector for which the density is to be estimated
 ##' @param n length of y
 #' @export
 

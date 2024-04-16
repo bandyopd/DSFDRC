@@ -1,9 +1,9 @@
 
-#' For a data with size n and c% censorig rate, this function returns the index of a sub data of desired size n1 with c% censoring
-##' @title Randomly selected sub sample of size n1 for prespecified censoring rate c
-##' @return an index of the sub sample of size n1 with c% censoring rate
+#' For a data with size n and specific censoring rate, this function returns the index of a sub data of desired size n1 and similar censoring proportion.
+##' @title A sub sample of size n1 with censoring rate similar to original data
+##' @return An index of of size n1 with with desired censoring proportion.
 ##' @author Atika Urmi
-##' @param delta a vector of censoring indicator in the original data
+##' @param delta a vector of censoring indicator in the original data. This is required to calculate the censoring rate in original data.
 ##' @param n1 desired sample size in the sub data
 #' @export
 
