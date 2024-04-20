@@ -1,7 +1,7 @@
 
-#' For a data with size n and specific censoring rate, this function returns the index of a sub data of desired size n1 and similar censoring proportion.
+#'  A subdata of size n1 that mimics the proportion of censored observations in the original data.
 ##' @title A sub sample of size n1 with censoring rate similar to original data
-##' @return An index of of size n1 with with desired censoring proportion.
+##' @return An index of selected samples of size n1.
 ##' @author Atika Urmi
 ##' @param delta a vector of censoring indicator in the original data. This is required to calculate the censoring rate in original data.
 ##' @param n1 desired sample size in the sub data

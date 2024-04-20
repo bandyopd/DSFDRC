@@ -12,10 +12,10 @@ index_n1(delta, n1)
 \item{n1}{desired sample size in the sub data}
 }
 \value{
-An index of of size n1 with with desired censoring proportion.
+An index of selected samples of size n1.
 }
 \description{
-For a data with size n and specific censoring rate, this function returns the index of a sub data of desired size n1 and similar censoring proportion.
+A subdata of size n1 that mimics the proportion of censored observations in the original data.
 }
 \author{
 Atika Urmi
