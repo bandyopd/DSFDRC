@@ -25,7 +25,7 @@ Note: n1+n2=n and n1<n2}
 \item{swap}{indicates whether inverse regression method should be considered. If swap='TRUE',it will estimate Y given X. otherwise, it will estimate X|Y.}
 }
 \value{
-a list of a matrix of correlation(omega) and the index of covariates based on the highest correlations with outcome conditioning on Z, while controlling the prespecified false discovery rate (FDR)
+lists containing covariates selected in the screening step (d1) and final step (d2) conditioning on Z with a given FDR level
 }
 \description{
 aCKIDS-alpha controlled Conditional kernel-based independence dual screening

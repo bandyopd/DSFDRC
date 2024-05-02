@@ -1,6 +1,6 @@
 #' a_KIDS-alpha-controlled kernel-based independence dual screening
 ##' @title a_KIDS
-##' @return a list of active predictors while controlling the prespecified false discovery rate (FDR)
+##' @return lists containing covariates selected in the screening step (d1) and final step (d2) for a given FDR level
 ##' @author Atika Farzana Urmi, Chenlu Ke
 ##' @param x a matrix of covariates
 ##' @param y observed time points
@@ -30,7 +30,7 @@ a_KIDS <- function(x, y, delta, n1, d, fdr, swap = F) {
         d2[[i]] <- unique(as.vector(d1[which(W1 >= z2[i, 1] | W2 >= z2[i, 2])]))
         ifelse(length(d2[[i]]) == 0, d2[[i]] <- 0, d2[[i]])
     }
-    d2
+    list(d1, d2)
 }
 
 

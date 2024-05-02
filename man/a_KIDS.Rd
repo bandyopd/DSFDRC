@@ -24,7 +24,7 @@ Note: n1+n2=n and n1<n2}
 default is 'FALSE'.}
 }
 \value{
-a list of active predictors while controlling the prespecified false discovery rate (FDR)
+lists containing covariates selected in the screening step (d1) and final step (d2) for a given FDR level
 }
 \description{
 a_KIDS-alpha-controlled kernel-based independence dual screening

@@ -1,7 +1,7 @@
 
 #' aCKIDS-alpha controlled Conditional kernel-based independence dual screening
 ##' @title a_CKIDS
-##' @return a list of a matrix of correlation(omega) and the index of covariates based on the highest correlations with outcome conditioning on Z, while controlling the prespecified false discovery rate (FDR)
+##' @return lists containing covariates selected in the screening step (d1) and final step (d2) conditioning on Z with a given FDR level
 ##' @author Atika Urmi
 ##' @param x a matrix of covariates
 ##' @param y observed time points
